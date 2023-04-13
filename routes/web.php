@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'index')->name('login');
     Route::post('custom-login', 'customLogin')->name('login.custom');
@@ -31,5 +33,4 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(VerificationController::class)->group(function () {
     Route::get('phone={phone}/email={email}/name={name}/password={password}', 'getOtp')->name('otp');
     Route::post('otp/verification', 'storeData')->name('store');
-
 });

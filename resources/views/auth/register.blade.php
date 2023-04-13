@@ -29,7 +29,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-end">Phone</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="number" max="10" max="10" class="form-control @error('phone') is-invalid @enderror" name="phone">
+                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 
@@ -90,30 +90,31 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
         $("#signupform").validate({
             rules: {
                 email: {
                     required: true
-                },
-                name: {
+                }
+                , name: {
                     required: true
-                },
-                phone: {
+                }
+                , phone: {
                     required: true
-                },
-                password: {
-                    minlength: 5,
-                    required:true,
-                },
-                password_confirmation: {
-                      minlength: 5,
-                      equalTo: "#password",
-                      required:true
-                },
-            }
+                    , minlength: 10
+                    , maxlength: 10
+                }
+                , password: {
+                    minlength: 5
+                    , required: true
+                , }
+                , password_confirmation: {
+                    minlength: 5
+                    , equalTo: "#password"
+                    , required: true
+                }
+            , }
         });
     });
 

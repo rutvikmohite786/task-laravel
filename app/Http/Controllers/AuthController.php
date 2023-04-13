@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Hash;
 use App\Models\UserVerification;
 use App\Jobs\VerificationJob;
+use Illuminate\Support\Facades\Session;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -25,9 +27,9 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+            $credentials = $request->only('email', 'password');
             if (auth()->guard('web')->attempt($credentials)) {
-                return redirect()->intended('/user/new');
+                return redirect()->intended('/home');
             } else {
                 return redirect()->back()->withErrors(['error' => config('const.password_check')]);
             }
@@ -44,6 +46,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'phone'=>'required|unique:users'
         ]);
 
         $data = $request->all();
@@ -59,7 +62,7 @@ class AuthController extends Controller
             'otp'=>$otp
           ];
         dispatch(new VerificationJob($details));
-        return redirect()->route('otp',['phone'=>$request->phone,'email'=>$request->email,'name'=>$request->name,'password'=>$request->password]);
+        return redirect()->route('otp',['phone'=>$request->phone,'email'=>$request->email,'name'=>$request->name,'password'=>$password]);
     }
     public function dashboard()
     {

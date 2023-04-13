@@ -21,7 +21,7 @@ class GuestCustome
 
         if(Auth::guard('web')->user()){
             if(request()->is('login')){
-                return redirect()->route('user');
+                return redirect()->route('home');
             } 
             if(request()->is('logout')){
                 return $next($request);
